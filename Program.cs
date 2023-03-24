@@ -1,4 +1,6 @@
-﻿namespace MJU23v_D10_inl_sveng
+﻿using System.Linq.Expressions;
+
+namespace MJU23v_D10_inl_sveng
 {
     internal class Program
     {
@@ -68,14 +70,21 @@
                         }
                     }
                 }
-                else if (command == "list") //FIXME: Exception, om inget finns laddat att visa.
+                else if (command == "list") 
                 {
-                    foreach (SweEngGloss gloss in dictionary)
+                    try
                     {
-                        Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                        foreach (SweEngGloss gloss in dictionary)
+                        {
+                            Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                        Console.WriteLine("Du behöver ladda en fil först, gör detta genom kommandot 'load'");
                     }
                 }
-                else if (command == "new") 
+                else if (command == "new")
                 {
                     if (argument.Length == 3) //FiXME: Skriva ut "testa igen" om bara ett ord anges. 
                         try
@@ -84,26 +93,27 @@
                                 dictionary.Add(new SweEngGloss(argument[1], argument[2]));
                             }
                         }
-                        catch (System.NullReferenceException)
+                        catch (NullReferenceException)
                         {
                             Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
                         }
 
                     else if (argument.Length == 1)
-                    try 
-                    {
-                            { string sveOrd, engOrd;
+                        try
+                        {
+                            {
+                                string sveOrd, engOrd;
                                 MataInOrd(out sveOrd, out engOrd);
 
                                 dictionary.Add(new SweEngGloss(sveOrd, engOrd));
                             }
-                            }
+                        }
                         catch (NullReferenceException)
                         {
                             Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
                         }
                 }
-                else if (command == "delete") 
+                else if (command == "delete")
                 {
                     try
                     {
