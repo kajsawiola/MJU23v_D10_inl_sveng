@@ -101,13 +101,10 @@
                 {
                     if (argument.Length == 3)
                     {
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        string sveOrd = argument[1];
+                        string engOrd = argument[2];
+                        Delete(sveOrd, engOrd); int index = -1;
+                        
                     }
                     else if (argument.Length == 1)
                     {
@@ -115,14 +112,7 @@
                         string sveOrd = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string engOrd = Console.ReadLine();
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == sveOrd && gloss.word_eng == engOrd)
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        Delete(sveOrd, engOrd);
                     }
                 }
                 else if (command == "translate") //FIXME: skriva ut info om angivet ord inte finns i ordlistan. 
@@ -145,6 +135,18 @@
                 }
             }
             while (true);
+        }
+
+        private static void Delete(string sveOrd, string engOrd)
+        {
+            int index = -1;
+            for (int i = 0; i < dictionary.Count; i++)
+            {
+                SweEngGloss gloss = dictionary[i];
+                if (gloss.word_swe == sveOrd && gloss.word_eng == engOrd)
+                    index = i;
+            }
+            dictionary.RemoveAt(index);
         }
 
         private static void Translate(string ord)
