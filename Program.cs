@@ -90,10 +90,9 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string sveOrd = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string engOrd = Console.ReadLine();
+                        string sveOrd, engOrd;
+                        MataInOrd(out sveOrd, out engOrd);
+
                         dictionary.Add(new SweEngGloss(sveOrd, engOrd));
                     }
                 }
@@ -108,10 +107,9 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.WriteLine("Write word in Swedish: ");
-                        string sveOrd = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string engOrd = Console.ReadLine();
+                        string sveOrd, engOrd;
+                        MataInOrd(out sveOrd, out engOrd);
+                       
                         Delete(sveOrd, engOrd);
                     }
                 }
@@ -135,6 +133,14 @@
                 }
             }
             while (true);
+        }
+
+        private static void MataInOrd(out string sveOrd, out string engOrd)
+        {
+            Console.WriteLine("Write word in Swedish: ");
+            sveOrd = Console.ReadLine();
+            Console.Write("Write word in English: ");
+            engOrd = Console.ReadLine();
         }
 
         private static void Delete(string sveOrd, string engOrd)
