@@ -50,28 +50,14 @@
                     {
                         using (StreamReader sr = new StreamReader(argument[1]))
                         {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
+                            LaddaFil(sr);
                         }
                     }
                     else if(argument.Length == 1) //FixME: skriva ut att filen är laddad.
                     {
                         using (StreamReader sr = new StreamReader(defaultFile))
                         {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = sr.ReadLine();
-                            }
+                            LaddaFil(sr);
                         }
                     }
                 }
@@ -133,6 +119,18 @@
                 }
             }
             while (true);
+        }
+
+        private static void LaddaFil(StreamReader sr)
+        {
+            dictionary = new List<SweEngGloss>(); // Empty it!
+            string line = sr.ReadLine();
+            while (line != null)
+            {
+                SweEngGloss gloss = new SweEngGloss(line);
+                dictionary.Add(gloss);
+                line = sr.ReadLine();
+            }
         }
 
         private static void MataInOrd(out string sveOrd, out string engOrd)
