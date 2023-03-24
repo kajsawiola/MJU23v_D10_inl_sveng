@@ -46,11 +46,18 @@
                 }
                 else if (command == "load") 
                 {
-                    if(argument.Length == 2) //FIXME: om filen inte hittas, -FileNotFoundException
+                    if(argument.Length == 2) 
                     {
-                        using (StreamReader sr = new StreamReader(argument[1]))
+                        try
                         {
-                            LaddaFil(sr);
+                            using (StreamReader sr = new StreamReader(argument[1]))
+                            {
+                                LaddaFil(sr);
+                            }
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Console.WriteLine("Angiven fil kunde inte hittas, försök gärna med en ny");
                         }
                     }
                     else if(argument.Length == 1) //FixME: skriva ut att filen är laddad.
