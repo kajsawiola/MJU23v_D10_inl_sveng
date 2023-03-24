@@ -75,7 +75,7 @@
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
                 }
-                else if (command == "new") //FIXME: System.NullReferenceException om load inte gjorts innan. 
+                else if (command == "new") 
                 {
                     if (argument.Length == 3) //FiXME: Skriva ut "testa igen" om bara ett ord anges. 
                         try
@@ -103,21 +103,27 @@
                             Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
                         }
                 }
-                else if (command == "delete") //FIXME: System.NullReferenceException, när listan ej är laddad. System.ArgumentOutOfRangeException: om ordet inte finns i listan.
+                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException: om ordet inte finns i listan.
                 {
-                    if (argument.Length == 3)
+                    try
                     {
-                        string sveOrd = argument[1];
-                        string engOrd = argument[2];
-                        Delete(sveOrd, engOrd); int index = -1;
+                        if (argument.Length == 3)
+                        {
+                            string sveOrd = argument[1];
+                            string engOrd = argument[2];
+                            Delete(sveOrd, engOrd); int index = -1;
+                        }
+                        else if (argument.Length == 1)
+                        {
+                            string sveOrd, engOrd;
+                            MataInOrd(out sveOrd, out engOrd);
 
+                            Delete(sveOrd, engOrd);
+                        }
                     }
-                    else if (argument.Length == 1)
+                    catch (System.NullReferenceException)
                     {
-                        string sveOrd, engOrd;
-                        MataInOrd(out sveOrd, out engOrd);
-
-                        Delete(sveOrd, engOrd);
+                        Console.WriteLine("Du har inte laddat någon lista att radera ifrån, gör det först genom att använda kommandot load.");
                     }
                 }
                 else if (command == "translate") //FIXME: skriva ut info om angivet ord inte finns i ordlistan. 
