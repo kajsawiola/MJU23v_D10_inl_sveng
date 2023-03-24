@@ -68,9 +68,9 @@
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
                 }
-                else if (command == "new")
+                else if (command == "new") //FIXME: System.NullReferenceException om load inte gjorts innan. 
                 {
-                    if (argument.Length == 3)
+                    if (argument.Length == 3) //FiXME: Skriva ut "testa igen" om bara ett ord anges. 
                     {
                         dictionary.Add(new SweEngGloss(argument[1], argument[2]));
                     }
