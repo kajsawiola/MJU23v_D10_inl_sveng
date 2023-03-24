@@ -44,9 +44,9 @@
                     $"translate:                 Översätter.\n" +
                     $"quit:                      Avlsutar programmet");
                 }
-                else if (command == "load")
+                else if (command == "load") 
                 {
-                    if(argument.Length == 2)
+                    if(argument.Length == 2) //FIXME: om filen inte hittas, -FileNotFoundException
                     {
                         using (StreamReader sr = new StreamReader(argument[1]))
                         {
@@ -60,7 +60,7 @@
                             }
                         }
                     }
-                    else if(argument.Length == 1)
+                    else if(argument.Length == 1) //FixME: skriva ut att filen är laddad.
                     {
                         using (StreamReader sr = new StreamReader(defaultFile))
                         {
@@ -75,7 +75,7 @@
                         }
                     }
                 }
-                else if (command == "list")
+                else if (command == "list") //FIXME: Exception, om inget finns laddat att visa.
                 {
                     foreach(SweEngGloss gloss in dictionary)
                     {
@@ -97,7 +97,7 @@
                         dictionary.Add(new SweEngGloss(s, e));
                     }
                 }
-                else if (command == "delete")
+                else if (command == "delete") //FIXME: System.NullReferenceException, när listan ej är laddad. System.ArgumentOutOfRangeException: om ordet inte finns i listan.
                 {
                     if (argument.Length == 3)
                     {
@@ -125,7 +125,7 @@
                         dictionary.RemoveAt(index);
                     }
                 }
-                else if (command == "translate")
+                else if (command == "translate") //FIXME: skriva ut info om angivet ord inte finns i ordlistan. 
                 {
                     if (argument.Length == 2)
                     {
