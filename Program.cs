@@ -44,9 +44,9 @@
                     $"translate:                 Översätter.\n" +
                     $"quit:                      Avlsutar programmet");
                 }
-                else if (command == "load") 
+                else if (command == "load")
                 {
-                    if(argument.Length == 2) 
+                    if (argument.Length == 2)
                     {
                         try
                         {
@@ -60,7 +60,7 @@
                             Console.WriteLine("Angiven fil kunde inte hittas, försök gärna med en ny");
                         }
                     }
-                    else if(argument.Length == 1) //FixME: skriva ut att filen är laddad.
+                    else if (argument.Length == 1) //FixME: skriva ut att filen är laddad.
                     {
                         using (StreamReader sr = new StreamReader(defaultFile))
                         {
@@ -70,7 +70,7 @@
                 }
                 else if (command == "list") //FIXME: Exception, om inget finns laddat att visa.
                 {
-                    foreach(SweEngGloss gloss in dictionary)
+                    foreach (SweEngGloss gloss in dictionary)
                     {
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
@@ -78,16 +78,30 @@
                 else if (command == "new") //FIXME: System.NullReferenceException om load inte gjorts innan. 
                 {
                     if (argument.Length == 3) //FiXME: Skriva ut "testa igen" om bara ett ord anges. 
-                    {
-                        dictionary.Add(new SweEngGloss(argument[1], argument[2]));
-                    }
-                    else if(argument.Length == 1)
-                    {
-                        string sveOrd, engOrd;
-                        MataInOrd(out sveOrd, out engOrd);
+                        try
+                        {
+                            {
+                                dictionary.Add(new SweEngGloss(argument[1], argument[2]));
+                            }
+                        }
+                        catch (System.NullReferenceException)
+                        {
+                            Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
+                        }
 
-                        dictionary.Add(new SweEngGloss(sveOrd, engOrd));
-                    }
+                    else if (argument.Length == 1)
+                    try 
+                    {
+                            { string sveOrd, engOrd;
+                                MataInOrd(out sveOrd, out engOrd);
+
+                                dictionary.Add(new SweEngGloss(sveOrd, engOrd));
+                            }
+                            }
+                        catch (System.NullReferenceException)
+                        {
+                            Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
+                        }
                 }
                 else if (command == "delete") //FIXME: System.NullReferenceException, när listan ej är laddad. System.ArgumentOutOfRangeException: om ordet inte finns i listan.
                 {
@@ -96,13 +110,13 @@
                         string sveOrd = argument[1];
                         string engOrd = argument[2];
                         Delete(sveOrd, engOrd); int index = -1;
-                        
+
                     }
                     else if (argument.Length == 1)
                     {
                         string sveOrd, engOrd;
                         MataInOrd(out sveOrd, out engOrd);
-                       
+
                         Delete(sveOrd, engOrd);
                     }
                 }
@@ -117,7 +131,7 @@
                     {
                         Console.WriteLine("Write word to be translated: ");
                         string inmatOrd = Console.ReadLine();
-                        Translate(inmatOrd);               
+                        Translate(inmatOrd);
                     }
                 }
                 else
