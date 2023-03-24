@@ -29,6 +29,21 @@
                 {
                     Console.WriteLine("Goodbye!");
                 }
+                else if (command == "help")
+                {
+                    Console.WriteLine($"Följande kommandon finns:\n" +
+                    $"load:                      Ladda filen 'sweng.lis'.\n" +
+                    $"load /file:                Ladda angien fil. \n" +
+                    $"list:                      Lista alla ord som finns laddade i ordboken. \n" +
+                    $"help:                      Listar alla funktioner i programmet.\n" +
+                    $"new:                       Lägga till en ny översättning.\n" +
+                    $"new /sve ord /eng ord:     Lägga till angiven översättning.\n" +
+                    $"delete:                    Radera en översättning. \n" +
+                    $"delete /sve ord /eng ord:  Radera angiven översättning.\n" +
+                    $"translate /ord:            Översätter angivet ord. \n" +
+                    $"translate:                 Översätter.\n" +
+                    $"quit:                      Avlsutar programmet");
+                }
                 else if (command == "load")
                 {
                     if(argument.Length == 2)
