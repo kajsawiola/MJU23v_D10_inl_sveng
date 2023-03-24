@@ -98,12 +98,12 @@
                                 dictionary.Add(new SweEngGloss(sveOrd, engOrd));
                             }
                             }
-                        catch (System.NullReferenceException)
+                        catch (NullReferenceException)
                         {
                             Console.WriteLine("Du har inte laddat någon lista att lägga till i, gör det först genom att använda kommandot load.");
                         }
                 }
-                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException: om ordet inte finns i listan.
+                else if (command == "delete") 
                 {
                     try
                     {
@@ -121,9 +121,13 @@
                             Delete(sveOrd, engOrd);
                         }
                     }
-                    catch (System.NullReferenceException)
+                    catch (NullReferenceException)
                     {
                         Console.WriteLine("Du har inte laddat någon lista att radera ifrån, gör det först genom att använda kommandot load.");
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        Console.WriteLine("Det angivna ordet finns inte i listan, prova gärna med ett nytt");
                     }
                 }
                 else if (command == "translate") //FIXME: skriva ut info om angivet ord inte finns i ordlistan. 
